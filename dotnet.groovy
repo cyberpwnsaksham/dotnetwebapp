@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         dockerImage = 'my-dotnet-app'
-        registry = 'bsaksham/dotnetwebapp:second'
+        registry = 'bsaksham/dotnetwebapp:third'
         registryCredential = 'dockerhub'
     }
     stages {
