@@ -12,8 +12,6 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // Install and restore .NET dependencies
-                    sh "dotnet restore"
                     // Build the .NET project
                     sh "dotnet build"
                 }
