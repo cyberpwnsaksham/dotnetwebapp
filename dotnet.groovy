@@ -34,7 +34,7 @@ pipeline {
             steps {
 script {
     // Authenticate with Docker Hub (if not already authenticated)
-    bat "docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+    bat "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
 
     // Build a Docker image for your .NET application
     bat "docker build -t bsaksham/dotnetwebapp:1.0 ."
