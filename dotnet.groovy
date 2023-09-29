@@ -31,12 +31,17 @@ pipeline {
 
         stage('Containerize') {
             steps {
-                script {
-                    // Build a Docker image for your .NET application
-                    bat "docker build -t bsaksham/dotnetwebapp:tagname/dotnetwebapp:1.0 ."
-                    // Push the Docker image to a Docker registry
-                    bat "docker push bsaksham/dotnetwebapp:tagname/dotnetwebapp:1.0"
-                }
+script {
+    // Authenticate with Docker Hub (if not already authenticated)
+    bat "docker login -u bsaksham -p Docker@123"
+
+    // Build a Docker image for your .NET application
+    bat "docker build -t bsaksham/dotnetwebapp:1.0 ."
+
+    // Push the Docker image to Docker Hub
+    bat "docker push bsaksham/dotnetwebapp:1.0"
+}
+
             }
         }
 
