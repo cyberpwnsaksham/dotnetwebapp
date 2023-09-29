@@ -4,13 +4,13 @@ pipeline {
     environment {
         // Define environment variables as needed
         // DOTNET_VERSION = '6.0' // Change to your desired .NET version
-        DOCKER_IMAGE_NAME = 'my-dotnet-app'
-        DOCKER_REGISTRY_URL = 'bsaksham/dotnetwebapp:tagname'
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+        dockerImage = 'my-dotnet-app'
+        registry = 'bsaksham/dotnetwebapp'
+        registryCredential = 'dockerhub'
     }
 
     stages {
-        stage('Build') {
+        stage('Build dotnet') {
             steps {
                 script {
                     // Install and restore .NET dependencies
@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('Test dotnet') {
             steps {
                 script {
                     // Run your tests here
@@ -34,13 +34,14 @@ pipeline {
             steps {
 script {
     // Authenticate with Docker Hub (if not already authenticated)
-    bat "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+    //bat "echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
 
     // Build a Docker image for your .NET application
-    bat "docker build -t bsaksham/dotnetwebapp:1.0 ."
+    dockerImage = docker.build registry
 
     // Push the Docker image to Docker Hub
-    bat "docker push bsaksham/dotnetwebapp:1.0"
+    docker.withRegistry('', registryCredential) {
+        dockerImage.push()
 }
 
             }
