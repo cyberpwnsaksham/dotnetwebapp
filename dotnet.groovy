@@ -28,6 +28,7 @@ pipeline {
                     dockerImage = docker.build registry
                         }
                   }
+        }
         stage('Pushing the image to HUB')
             {
                 steps {
