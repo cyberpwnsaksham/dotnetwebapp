@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Define environment variables as needed
-        DOTNET_VERSION = '6.0' // Change to your desired .NET version
+        // DOTNET_VERSION = '6.0' // Change to your desired .NET version
         DOCKER_IMAGE_NAME = 'my-dotnet-app'
         DOCKER_REGISTRY_URL = 'bsaksham/dotnetwebapp:tagname'
     }
