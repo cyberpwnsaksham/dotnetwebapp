@@ -6,6 +6,7 @@ pipeline {
         // DOTNET_VERSION = '6.0' // Change to your desired .NET version
         DOCKER_IMAGE_NAME = 'my-dotnet-app'
         DOCKER_REGISTRY_URL = 'bsaksham/dotnetwebapp:tagname'
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
     }
 
     stages {
@@ -33,7 +34,7 @@ pipeline {
             steps {
 script {
     // Authenticate with Docker Hub (if not already authenticated)
-    bat "docker login -u bsaksham --password-stdin Docker@123"
+    bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 
     // Build a Docker image for your .NET application
     bat "docker build -t bsaksham/dotnetwebapp:1.0 ."
