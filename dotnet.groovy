@@ -44,10 +44,8 @@ pipeline {
         stage('Deploying to LocalHost')
             {
                 steps {
-                    script {
-                    docker -p 9010:5000 my-dotnet-app
+                    bat 'docker run -d -p 9010:5000 bsaksham/dotnetwebapp:fourth'
                         }
-                    }
 
         }
 }
